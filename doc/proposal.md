@@ -4,12 +4,12 @@ DSCI 532 Project Proposal
 Overview
 --------
 
-In recent decades, violent crime in the U.S. has decreased nationwide, but not all jurisdictions have experienced this decrease. In fact, there is considerable heterogeneity in violent crime rates among American cities, and violent crime continues to be major problem for many of them. For this reason, it is useful to look at more granular data about violent crime. To do so, we propose building a visualization app that will allow users to compare the violent crime rates and patterns in violent crime between multiple cities. Our app will allow users to specify a time period, a set of cities, and a type of crime to compare. Users will be able to see the long term trends in crime rates for the cities they specify, as well as look at the composition of violent crime for a specific year across those cities.
+Recent decades have seen violent crime in the U.S. decrease nationwide, but not all jurisdictions have experienced this decrease. In fact, there is considerable heterogeneity in violent crime rates among American cities, and violent crime continues to be major problem for many of them. For this reason, it is useful to look at more granular data about violent crime. To do so, we propose building a visualization app that will allow users to compare the violent crime rates and patterns in violent crime between multiple cities. Our app will allow users to specify a time period, a set of cities, and a type of crime to compare. Users will be able to see the long term trends in crime rates for the cities they specify, as well as look at the composition of violent crime for a specific year across those cities.
 
 Data Description
 ----------------
 
-Our dataset comes from the Marhsall Project, which compiled crime data for major American cities from the FBI's Uniform Crime Reporting (UCR) Program. The dataset covers the period from 1975 - 2015, and contains information on sixty-eight cities, as well as national averages. For this project, we will be looking only at crime rates that are normalized by population (i.e. crime per 100,000 people). For each city, we have five annual crime rates: the total violent crime rate, and crime rates for four specific types of violent crime (assault, homicide, rape, and robbery).
+Our dataset comes from the Marhsall Project, which compiled crime data for major American cities from the FBI's Uniform Crime Reporting (UCR) Program. The dataset covers the period from 1975 - 2015, and contains information on sixty-eight cities, as well as national averages. For this project, we will be looking only at crime rates that are normalized by population (i.e. crime per 100,000 people). For each city, we have five annual crime rates: total violent crime rate and crime rates for four specific types of violent crime (assault, homicide, rape, and robbery).
 
 Usage Scenario and Tasks
 ------------------------
