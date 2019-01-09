@@ -11,6 +11,18 @@ Data Description
 
 Our dataset comes from the Marhsall Project, which compiled crime data for major American cities from the FBI's Uniform Crime Reporting (UCR) Program. The dataset covers the period from 1975 - 2015, and contains information on sixty-eight cities, as well as national averages. For this project, we will be looking only at crime rates that are normalized by population (i.e. crime per 100,000 people). For each city, we have five annual crime rates: total violent crime rate and crime rates for four specific types of violent crime (assault, homicide, rape, and robbery).
 
+#### Key Variables
+
+| Variable Name      | Description | Type |
+|--------------------|-------------|------|
+| `department_name`  |             |      |
+| `year`             |             |      |
+| `violent_per_100k` |             |      |
+| `homs_per_100k`    |             |      |
+| `rape_per_100k`    |             |      |
+| `rob_per_100k`     |             |      |
+| `agg_ass_per_100k` |             |      |
+
 Usage Scenario and Tasks
 ------------------------
 

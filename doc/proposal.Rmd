@@ -13,6 +13,18 @@ Recent decades have seen violent crime in the U.S. decrease nationwide, but not 
 
 Our dataset comes from the Marhsall Project, which compiled crime data  for major American cities from the FBI's Uniform Crime Reporting (UCR) Program. The dataset covers the period from 1975 - 2015, and contains information on sixty-eight cities, as well as national averages. For this project, we will be looking only at crime rates that are normalized by population (i.e. crime per 100,000 people). For each city, we have five annual crime rates: total violent crime rate and crime rates for four specific types of violent crime (assault, homicide, rape, and robbery).
 
+
+#### Key Variables
+|Variable Name |Description |Type |
+|---------|------------|-----|
+|`department_name`| | |
+|`year`| | |
+|`violent_per_100k`| | |
+|`homs_per_100k`| | |
+|`rape_per_100k`| | |
+|`rob_per_100k` | | |
+|`agg_ass_per_100k`| | |
+
 ## Usage Scenario and Tasks
 
 A crime analyst reads an article claiming that violent crime in the Midwest have been falling in the past 25 years. To get a richer understanding of crime in the Midwest, she decides to use our app to compare the total violent crime rates accross a set of large Midwestern cities: Cincinnati, OH;  Chicago, IL; St. Louis, MO;  Milwaukee, WI; and Minneapolis, MN. To do this she selects the cities, a range of years, and a type of violent crime in the side bar panel of our app. Looking at a time series plot, she notices that there were large decreases in violent crime in Chicago throughout the 1990s, while crime rates in other Midwestern cities stayed fairly constant over the same period. She suspects that falling violent crime in the Midwest may be largely the result of successful violence reduction in Chicago, and decides to investigate further. Perhaps there were policies implemented in Chicago that could also be successful elsewhere for reducing violent crime.  
