@@ -17,13 +17,13 @@ Our dataset comes from the Marhsall Project, which compiled crime data  for majo
 #### Key Variables
 |Variable Name |Description |Type |
 |---------|------------|-----|
-|`department_name`| | |
-|`year`| | |
-|`violent_per_100k`| | |
-|`homs_per_100k`| | |
-|`rape_per_100k`| | |
-|`rob_per_100k` | | |
-|`agg_ass_per_100k`| | |
+|`department_name`|US city name|Categorical|
+|`year`|Year from 1975-2015|Numerical|
+|`violent_per_100k`|Normalized violent crime rate (i.e. number of violent crime per 100k people)|Numerical|
+|`homs_per_100k`|Normalized homicide rate (i.e. number of homicide per 100k people) |Numerical|
+|`rape_per_100k`|Normalized rape rate (i.e. number of rape per 100k people)|Numerical|
+|`rob_per_100k` |Normalized robbery rate (i.e. number of robbery per 100k people)|Numerical|
+|`agg_ass_per_100k`|Normalized aggravated assault rate (i.e. number of aggravated assault per 100k people)|Numerical|
 
 ## Usage Scenario and Tasks
 
@@ -36,7 +36,7 @@ Our app's landing page will have two panels. The first panel will have a time se
 
 The second panel will be a bar plot for comparing the proportions of total violent crime the specified type of crime comprised in one year for different cities. The cities represented here will be the same as the cities selected for the first panel. Users will be able to select which year they want to view from a dropdown menu. The choice of year will be limited to the range specified for panel one. If total violent crime is selected instead, then the bar plot will show the composition of violent crime. 
 
-![](../img/AppSketch.png)
-
+#### App Sketch
+![image](../img/AppSketch.png)
 
 
