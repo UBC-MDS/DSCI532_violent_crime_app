@@ -34,3 +34,5 @@ Description of App and Sketch
 Our app's landing page will have two panels. The first panel will have a time series plot that can be used to look at trends in crime rates for up to six cities. Users will be able to select the cities using a dropdown menu, and type of crime (assault, homicide, rape, robbery, or total violent crime) using radio buttons, and the range of dates using a slider.
 
 The second panel will be a bar plot for comparing the proportions of total violent crime the specified type of crime comprised in one year for different cities. The cities represented here will be the same as the cities selected for the first panel. Users will be able to select which year they want to view from a dropdown menu. The choice of year will be limited to the range specified for panel one. If total violent crime is selected instead, then the bar plot will show the composition of violent crime.
+
+![](../img/AppSketch.png)
