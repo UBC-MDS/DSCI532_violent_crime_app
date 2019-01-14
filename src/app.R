@@ -71,24 +71,6 @@ server <- function(input, output) {
     
   }
   
-  #start_yr = 1985
-  #end_yr = 2010
-  #yr = 1975
-
-  #output$crime_hist <- renderPlot(# any R code then will be satisfied 
-  #  ucr_crime %>% 
-  #        filter(department_name %in% c("Chicago", "Cleveland", "Columbus, Ohio")) %>%
-  #        filter(year == yr) %>% 
-  #        ggplot(aes(x=department_name,y=violent_per_100k)) +geom_histogram(stat="identity")
-  #  )
-  #output$crime_ts <- renderPlot(# any R code then will be satisfied 
-  #  ucr_crime %>% 
-  #       filter(department_name %in% c("Chicago", "Cleveland", "Columbus, Ohio")) %>%
-      #filter(department_name =="Chicago") %>%
-  #        filter(year <= end_yr & year >= start_yr) %>% 
-  #        ggplot(aes(year,violent_per_100k, colour=department_name)) + geom_line())
-  
-
 
 # Run the application 
 shinyApp(ui = ui, server = server)
