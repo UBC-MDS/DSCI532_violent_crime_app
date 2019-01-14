@@ -24,11 +24,22 @@ ui <- fluidPage(
       #Input: Year Selected ---- Bar Chart
       sliderInput("year_bar", "Select your desired year for bar:",
                   min = 1975, max = 2015,
-                  value = 1985)
+                  value = 1985),
+      hr(),
       
-      #Input: Cities
+      #Input: Selected Cities -----
+      selectInput("city","Choose a city:",
+                  choices = ucr_crime$department_name),
       
-      #Input: Crime type
+      #Input: Select Crime type ----
+      radioButtons("crime_type", "Crime Type:",
+                   choices = c(Rape = 'rape_per_100k',
+                               Homicide = 'homs_per_100k',
+                               Robbery = 'rob_per_100k',
+                               `Aggravated Assault` = 'agg_ass_per_100k',
+                               All = 'violent_per_100k'),
+                   selected = "violent_per_100k")
+      
     ),
     
     # Main panel for displaying outputs -----
