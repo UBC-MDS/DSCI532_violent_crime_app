@@ -16,12 +16,14 @@ ui <- fluidPage(
     
     # Sidebar to demonstrate various slider options ----            
     sidebarPanel(
-      
+      conditionalPanel(
+        'input.panel === "plot"',
       #Input: Year Range
       sliderInput("year_line", "Select your desired year range:",
                   min = 1975, max = 2015, value = c(1975,2015)),
       
       #Input: Year Selected ---- Bar Chart
+      
       sliderInput("year_bar", "Select your desired year for bar:",
                   min = 1975, max = 2015,
                   value = 1985),
@@ -48,13 +50,17 @@ ui <- fluidPage(
                                `Aggravated Assault` = 'agg_ass_per_100k',
                                All = 'violent_per_100k'),
                    selected = "violent_per_100k")
-      
+      )
     ),
     
     # Main panel for displaying outputs -----
     mainPanel(
-       fluidRow(plotOutput("crime_hist"), 
-                plotOutput("crime_ts"))
+      tabsetPanel(
+        id = 'panel',
+        tabPanel("plot", fluidRow(plotOutput("crime_bar"), 
+                                  plotOutput("crime_ts"))),
+        tabPanel('data', DT::dataTableOutput("ucr_crime_filtered"))
+      )
     )
   )
 )
@@ -69,7 +75,7 @@ server <- function(input, output) {
   # --------------------------------------------------------------------
   #                            Bar Chart
   # --------------------------------------------------------------------
-  crime_hist_df <- reactive({
+  crime_bar_df <- reactive({
     ucr_crime %>% 
       filter(department_name %in% c(input$city1, input$city2, input$city3, input$city4)) %>%
       filter(year == input$year_bar)})
@@ -78,22 +84,35 @@ server <- function(input, output) {
   #                            line Chart
   # --------------------------------------------------------------------
   crime_ts_df <- reactive({
-    select_col <- input$crime_type
     ucr_crime %>% 
       filter(department_name %in% c(input$city1, input$city2, input$city3, input$city4)) %>%
       filter(year <= input$year_line[2] & year >= input$year_line[1])})
   
-
-    output$crime_hist <- renderPlot(
-      crime_hist_df() %>% 
-        ggplot(aes(department_name,violent_per_100k)) + geom_histogram(stat="identity"))
-    
+  # --------------------------------------------------------------------
+  #                            Dataset Table
+  # --------------------------------------------------------------------
+  
+  ucr_crime_df <- reactive({
+    ucr_crime %>% 
+      filter(department_name %in% c(input$city1, input$city2, input$city3, input$city4)) %>%
+      filter(year <= input$year_line[2] & year >= input$year_line[1]) %>% 
+      select('department_name', 'year', input$crime_type) %>% 
+      arrange(department_name)
+      })
+  
+  # Generate all outputs -----
+    #Bar Chart
+    output$crime_bar <- renderPlot(
+      crime_bar_df() %>% 
+        ggplot(aes(department_name,eval(as.name(input$crime_type)))) + geom_bar(stat="identity"))
+    #Line Chart
     output$crime_ts <- renderPlot(
       crime_ts_df() %>% 
-        ggplot(aes(year,violent_per_100k, colour=department_name)) + geom_line())
-    
+        ggplot(aes(year,eval(as.name(input$crime_type)), colour=department_name)) + geom_line())
+    #Dataset
+    output$ucr_crime_filtered <- DT::renderDataTable({
+      DT::datatable(ucr_crime_df(), options = list(lengthMenu = c(30, 50, 100), pageLength = 10))})
   }
   
-
 # Run the application 
 shinyApp(ui = ui, server = server)
