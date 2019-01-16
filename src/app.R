@@ -20,7 +20,7 @@ ui <- fluidPage(
     # Sidebar to demonstrate various slider options ----            
     sidebarPanel(
       conditionalPanel(
-        'input.panel === "plot"',
+        'input.panel === "Plot"',
       #Input: Year Range
       sliderInput("year_line", "Select your desired year range:",
                   min = 1975, max = 2015, value = c(1975,2015)),
@@ -44,7 +44,7 @@ ui <- fluidPage(
                                Robbery = 'Robbery',
                                `Aggravated Assault` = 'Aggravated Assault',
                                `Total Violent Crime` = 'Total Violent Crime'),
-                   selected = "violent_per_100k")
+                   selected = 'Total Violent Crime')
       )
     ),
     
@@ -52,9 +52,9 @@ ui <- fluidPage(
     mainPanel(
       tabsetPanel(
         id = 'panel',
-        tabPanel("plot", fluidRow(plotOutput("crime_ts"), 
+        tabPanel("Plot", fluidRow(plotOutput("crime_ts"), 
                                   plotOutput("crime_bar"))),
-        tabPanel('data', DT::dataTableOutput("ucr_crime_filtered"))
+        tabPanel('Data', DT::dataTableOutput("ucr_crime_filtered"))
       )
     )
   )
@@ -94,9 +94,10 @@ server <- function(input, output) {
   
   ucr_crime_df <- reactive({
     ucr_crime %>% 
-      filter(city %in% c(input$city1, input$city2, input$city3, input$city4)) %>%
-      filter(year <= input$year_line[2] & year >= input$year_line[1]) %>% 
-      select('city', 'year', input$crime_type) %>% 
+      filter(city %in% input$cities,
+             year <= input$year_line[2] & year >= input$year_line[1],
+             type == as.name(input$crime_type)) %>%
+      select(city, year, type, n) %>% 
       arrange(city, year)
       })
   
