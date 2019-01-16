@@ -1,0 +1,139 @@
+library(shiny)
+library(tidyverse)
+
+# read in tidy data with factors
+ucr_crime <- read_csv("../data/cleaned_data.csv") %>% 
+  mutate(city = as.factor(city),
+         type = as.factor(type))
+
+ui <- fluidPage(
+  
+  # Panels
+  
+  # App title
+  titlePanel("US Violent Crime Visualization App", 
+             windowTitle = "Year Range"),
+  
+  # Sidebar layout with input and output definitions ---- position on right
+  sidebarLayout(position = "right",
+    
+    # Sidebar to demonstrate various slider options ----            
+    sidebarPanel(
+      conditionalPanel(
+        'input.panel === "plot"',
+      #Input: Year Range
+      sliderInput("year_line", "Select your desired year range:",
+                  min = 1975, max = 2015, value = c(1975,2015)),
+      
+      #Input: Year Selected ---- Bar Chart
+      
+      sliderInput("year_bar", "Select your desired year for bar:",
+                  min = 1975, max = 2015,
+                  value = 1985),
+      hr(),
+      
+      #Input: Selected Cities -----
+      selectInput("cities","Choose some cities to compare",
+                  choices = ucr_crime$city,
+                  multiple = TRUE),
+      
+      #Input: Select Crime type ----
+      radioButtons("crime_type", "Crime Type:",
+                   choices = c(Rape = 'Rape',
+                               Homicide = 'Homicide',
+                               Robbery = 'Robbery',
+                               `Aggravated Assault` = 'Aggravated Assault',
+                               All = 'Total Violent Crime'),
+                   selected = "violent_per_100k")
+      )
+    ),
+    
+    # Main panel for displaying outputs -----
+    mainPanel(
+      tabsetPanel(
+        id = 'panel',
+        tabPanel("plot", fluidRow(plotOutput("crime_ts"), 
+                                  plotOutput("crime_bar"))),
+        tabPanel('data', DT::dataTableOutput("ucr_crime_filtered"))
+      )
+    )
+  )
+)
+
+
+
+# Define server logic required to draw a histogram and a time series
+server <- function(input, output) {
+  
+  # Reactive expression to create data frame of all input values ----
+  
+  # --------------------------------------------------------------------
+  #                            Data frame for Bar Chart
+  # --------------------------------------------------------------------
+  crime_bar_df <- reactive({
+    ucr_crime %>% 
+      filter(city %in% input$cities, 
+             year == input$year_bar) %>% 
+      select(year, type, n, city)
+    })
+  
+  # --------------------------------------------------------------------
+  #                            Data frame for line Chart
+  # --------------------------------------------------------------------
+  crime_ts_df <- reactive({
+    ucr_crime %>% 
+      filter(city %in% input$cities,
+            year <= input$year_line[2] & year >= input$year_line[1],
+            type == as.name(input$crime_type)) %>% 
+      select(year, n, city)
+    })
+  
+  # --------------------------------------------------------------------
+  #                            Dataset Table
+  # --------------------------------------------------------------------
+  
+  ucr_crime_df <- reactive({
+    ucr_crime %>% 
+      filter(city %in% c(input$city1, input$city2, input$city3, input$city4)) %>%
+      filter(year <= input$year_line[2] & year >= input$year_line[1]) %>% 
+      select('city', 'year', input$crime_type) %>% 
+      arrange(city, year)
+      })
+  
+  # Generate all outputs -----
+    
+  #Bar Chart
+    output$crime_bar <- renderPlot(
+      ggplot() +
+        geom_bar(data = crime_bar_df() %>% filter(type == "Total Violent Crime"),
+                 mapping = aes(y = n, x = city, fill = "Total Violent Crime"),
+                 stat = "identity",
+                 alpha = 0.8) +
+        geom_bar(data = crime_bar_df() %>% filter(type == as.character(input$crime_type)),
+                 mapping = aes(x = city, y = n, fill = as.character(input$crime_type)),
+                 stat = "identity",
+                 alpha = 0.8) +
+        labs(fill = "Type") +
+        theme_bw() +
+        scale_fill_viridis_d()
+      )
+    
+    #Line Chart
+    output$crime_ts <- renderPlot(
+      crime_ts_df() %>% 
+        ggplot(aes(x = year, y = n, colour = fct_reorder2(city, year, n))) +
+          geom_line() +
+          geom_point(alpha = 0.5) +
+          labs(colour = "City") +
+          ylab(paste(input$crime_type , "per 100,000")) +
+          xlab("Year") +
+          theme_bw() +
+          scale_colour_viridis_d()
+      )
+    #Dataset
+    output$ucr_crime_filtered <- DT::renderDataTable({
+      DT::datatable(ucr_crime_df(), options = list(lengthMenu = c(30, 50, 100), pageLength = 10))})
+  }
+  
+# Run the application 
+shinyApp(ui = ui, server = server)
