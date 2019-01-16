@@ -43,7 +43,7 @@ ui <- fluidPage(
                                Homicide = 'Homicide',
                                Robbery = 'Robbery',
                                `Aggravated Assault` = 'Aggravated Assault',
-                               All = 'Total Violent Crime'),
+                               `Total Violent Crime` = 'Total Violent Crime'),
                    selected = 'Total Violent Crime')
       )
     ),
@@ -131,9 +131,11 @@ server <- function(input, output) {
           theme_bw() +
           scale_colour_viridis_d()
       )
+    
     #Dataset
     output$ucr_crime_filtered <- DT::renderDataTable({
-      DT::datatable(ucr_crime_df(), options = list(lengthMenu = c(30, 50, 100), pageLength = 10))})
+      DT::datatable(ucr_crime_df(), options = list(lengthMenu = c(30, 50, 100), pageLength = 10))
+      })
   }
   
 # Run the application 
