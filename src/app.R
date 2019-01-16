@@ -1,7 +1,10 @@
 library(shiny)
 library(tidyverse)
-library(ggplot2)
-ucr_crime <- read.csv("../data/ucr_crime_1975_2015.csv", stringsAsFactors = FALSE)
+
+# read in tidy data with factors
+ucr_crime <- read_csv("../data/cleaned_data.csv") %>% 
+  mutate(city = as.factor(city),
+         type = as.factor(type))
 
 ui <- fluidPage(
   
@@ -30,25 +33,17 @@ ui <- fluidPage(
       hr(),
       
       #Input: Selected Cities -----
-      selectInput("city1","Choose the first city:",
-                  choices = ucr_crime$department_name),
-      
-      selectInput("city2","Choose the second city:",
-                  choices = ucr_crime$department_name),
-      
-      selectInput("city3","Choose the third city:",
-                  choices = ucr_crime$department_name),
-      
-      selectInput("city4","Choose the fourth city:",
-                  choices = ucr_crime$department_name),
+      selectInput("cities","Choose some cities to compare",
+                  choices = ucr_crime$city,
+                  multiple = TRUE),
       
       #Input: Select Crime type ----
       radioButtons("crime_type", "Crime Type:",
-                   choices = c(Rape = 'rape_per_100k',
-                               Homicide = 'homs_per_100k',
-                               Robbery = 'rob_per_100k',
-                               `Aggravated Assault` = 'agg_ass_per_100k',
-                               All = 'violent_per_100k'),
+                   choices = c(Rape = 'Rape',
+                               Homicide = 'Homicide',
+                               Robbery = 'Robbery',
+                               `Aggravated Assault` = 'Aggravated Assault',
+                               All = 'Total Violent Crime'),
                    selected = "violent_per_100k")
       )
     ),
@@ -57,8 +52,8 @@ ui <- fluidPage(
     mainPanel(
       tabsetPanel(
         id = 'panel',
-        tabPanel("plot", fluidRow(plotOutput("crime_bar"), 
-                                  plotOutput("crime_ts"))),
+        tabPanel("plot", fluidRow(plotOutput("crime_ts"), 
+                                  plotOutput("crime_bar"))),
         tabPanel('data', DT::dataTableOutput("ucr_crime_filtered"))
       )
     )
@@ -73,20 +68,25 @@ server <- function(input, output) {
   # Reactive expression to create data frame of all input values ----
   
   # --------------------------------------------------------------------
-  #                            Bar Chart
+  #                            Data frame for Bar Chart
   # --------------------------------------------------------------------
   crime_bar_df <- reactive({
     ucr_crime %>% 
-      filter(department_name %in% c(input$city1, input$city2, input$city3, input$city4)) %>%
-      filter(year == input$year_bar)})
+      filter(city %in% input$cities, 
+             year == input$year_bar) %>% 
+      select(year, type, n, city)
+    })
   
   # --------------------------------------------------------------------
-  #                            line Chart
+  #                            Data frame for line Chart
   # --------------------------------------------------------------------
   crime_ts_df <- reactive({
     ucr_crime %>% 
-      filter(department_name %in% c(input$city1, input$city2, input$city3, input$city4)) %>%
-      filter(year <= input$year_line[2] & year >= input$year_line[1])})
+      filter(city %in% input$cities,
+            year <= input$year_line[2] & year >= input$year_line[1],
+            type == as.name(input$crime_type)) %>% 
+      select(year, n, city)
+    })
   
   # --------------------------------------------------------------------
   #                            Dataset Table
@@ -94,21 +94,42 @@ server <- function(input, output) {
   
   ucr_crime_df <- reactive({
     ucr_crime %>% 
-      filter(department_name %in% c(input$city1, input$city2, input$city3, input$city4)) %>%
+      filter(city %in% c(input$city1, input$city2, input$city3, input$city4)) %>%
       filter(year <= input$year_line[2] & year >= input$year_line[1]) %>% 
-      select('department_name', 'year', input$crime_type) %>% 
-      arrange(department_name)
+      select('city', 'year', input$crime_type) %>% 
+      arrange(city, year)
       })
   
   # Generate all outputs -----
-    #Bar Chart
+    
+  #Bar Chart
     output$crime_bar <- renderPlot(
-      crime_bar_df() %>% 
-        ggplot(aes(department_name,eval(as.name(input$crime_type)))) + geom_bar(stat="identity"))
+      ggplot() +
+        geom_bar(data = crime_bar_df() %>% filter(type == "Total Violent Crime"),
+                 mapping = aes(y = n, x = city, fill = "Total Violent Crime"),
+                 stat = "identity",
+                 alpha = 0.8) +
+        geom_bar(data = crime_bar_df() %>% filter(type == as.character(input$crime_type)),
+                 mapping = aes(x = city, y = n, fill = as.character(input$crime_type)),
+                 stat = "identity",
+                 alpha = 0.8) +
+        labs(fill = "Type") +
+        theme_bw() +
+        scale_fill_viridis_d()
+      )
+    
     #Line Chart
     output$crime_ts <- renderPlot(
       crime_ts_df() %>% 
-        ggplot(aes(year,eval(as.name(input$crime_type)), colour=department_name)) + geom_line())
+        ggplot(aes(x = year, y = n, colour = fct_reorder2(city, year, n))) +
+          geom_line() +
+          geom_point(alpha = 0.5) +
+          labs(colour = "City") +
+          ylab(paste(input$crime_type , "per 100,000")) +
+          xlab("Year") +
+          theme_bw() +
+          scale_colour_viridis_d()
+      )
     #Dataset
     output$ucr_crime_filtered <- DT::renderDataTable({
       DT::datatable(ucr_crime_df(), options = list(lengthMenu = c(30, 50, 100), pageLength = 10))})
