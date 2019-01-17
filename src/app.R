@@ -21,23 +21,24 @@ ui <- fluidPage(
     sidebarPanel(
       conditionalPanel(
         'input.panel === "Plot"',
-      #Input: Year Range
+      # Input: Year Range
       sliderInput("year_line", "Select your desired year range:",
                   min = 1975, max = 2015, value = c(1975,2015)),
       
-      #Input: Year Selected ---- Bar Chart
+      # Input: Year Selected ---- Bar Chart
       
       sliderInput("year_bar", "Select your desired year for bar:",
                   min = 1975, max = 2015,
                   value = 1985),
       hr(),
       
-      #Input: Selected Cities -----
+      # Input: Selected Cities -----
       selectInput("cities","Choose some cities to compare",
                   choices = ucr_crime$city,
-                  multiple = TRUE),
+                  multiple = TRUE,
+                  selected = c("Memphis, Tenn.", "Chicago")),
       
-      #Input: Select Crime type ----
+      # Input: Select Crime type ----
       radioButtons("crime_type", "Crime Type:",
                    choices = c(Rape = 'Rape',
                                Homicide = 'Homicide',
@@ -47,12 +48,13 @@ ui <- fluidPage(
                    selected = 'Total Violent Crime')
       )
     ),
-    
+
     # Main panel for displaying outputs -----
     mainPanel(
       tabsetPanel(
         id = 'panel',
-        tabPanel("Plot", fluidRow(plotOutput("crime_ts"), 
+        tabPanel("Plot", fluidRow(plotOutput("crime_ts", 
+                                             hover = hoverOpts(id = "plot_hover", delayType = "throttle")), 
                                   plotOutput("crime_bar"))),
         tabPanel('Data', DT::dataTableOutput("ucr_crime_filtered"))
       )
@@ -105,18 +107,27 @@ server <- function(input, output) {
     
   #Bar Chart
     output$crime_bar <- renderPlot(
-      ggplot() +
-        geom_bar(data = crime_bar_df() %>% filter(type == "Total Violent Crime"),
-                 mapping = aes(y = n, x = city, fill = "Total Violent Crime"),
-                 stat = "identity",
-                 alpha = 0.8) +
-        geom_bar(data = crime_bar_df() %>% filter(type == as.character(input$crime_type)),
-                 mapping = aes(x = city, y = n, fill = as.character(input$crime_type)),
-                 stat = "identity",
-                 alpha = 0.8) +
-        labs(fill = "Type") +
-        theme_bw() +
-        scale_fill_viridis_d()
+      if(input$crime_type != "Total Violent Crime") {
+        ggplot() +
+          geom_bar(data = crime_bar_df() %>% filter(type == "Total Violent Crime"),
+                   mapping = aes(y = n, x = city, fill = "Total Violent Crime"),
+                   stat = "identity",
+                   alpha = 0.8) +
+          geom_bar(data = crime_bar_df() %>% filter(type == as.character(input$crime_type)),
+                   mapping = aes(x = city, y = n, fill = as.character(input$crime_type)),
+                   stat = "identity",
+                   alpha = 0.8) +
+          labs(fill = "Type") +
+          theme_bw() +
+          scale_fill_viridis_d()
+      } else {
+        crime_bar_df() %>%
+          filter(type != "Total Violent Crime") %>% 
+          ggplot(aes(x = city, y = n, fill = type)) +
+            geom_bar(stat = "identity") +
+            theme_bw() +
+            scale_fill_viridis_d()
+      }
       )
     
     #Line Chart
@@ -130,7 +141,8 @@ server <- function(input, output) {
           xlab("Year") +
           theme_bw() +
           scale_colour_viridis_d()
-      )
+    )
+      
     
     #Dataset
     output$ucr_crime_filtered <- DT::renderDataTable({
