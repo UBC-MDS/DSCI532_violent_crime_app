@@ -1,4 +1,5 @@
 library(shiny)
+library(plotly)
 library(tidyverse)
 
 # read in tidy data with factors
@@ -53,8 +54,7 @@ ui <- fluidPage(
     mainPanel(
       tabsetPanel(
         id = 'panel',
-        tabPanel("Plot", fluidRow(plotOutput("crime_ts", 
-                                             hover = hoverOpts(id = "plot_hover", delayType = "throttle")), 
+        tabPanel("Plot", fluidRow(plotlyOutput("crime_ts"), 
                                   plotOutput("crime_bar"))),
         tabPanel('Data', DT::dataTableOutput("ucr_crime_filtered"))
       )
@@ -131,7 +131,7 @@ server <- function(input, output) {
       )
     
     #Line Chart
-    output$crime_ts <- renderPlot(
+    output$crime_ts <- renderPlotly(
       crime_ts_df() %>% 
         ggplot(aes(x = year, y = n, colour = fct_reorder2(city, year, n))) +
           geom_line() +
