@@ -136,9 +136,10 @@ server <- function(input, output) {
         ggplot(aes(x = year, y = n, colour = fct_reorder2(city, year, n))) +
           geom_line() +
           geom_point(alpha = 0.5) +
-          labs(colour = "City") +
+          labs(colour = "Cities") +
           ylab(paste(input$crime_type , "per 100,000")) +
           xlab("Year") +
+          ggtitle(paste(input$crime_type, "Rates", input$year_line[1], "-", input$year_line[2])) +
           theme_bw() +
           scale_colour_viridis_d()
     )
