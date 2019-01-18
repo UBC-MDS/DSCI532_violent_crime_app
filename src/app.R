@@ -24,18 +24,18 @@ ui <- fluidPage(
       conditionalPanel(
         'input.panel === "Plot"',
       # Input: Year Range
-      sliderInput("year_line", "Select your desired year range:",
+      sliderInput("year_line", "Select a range of years to view:",
                   min = 1975, max = 2015, value = c(1975,2015)),
       
       # Input: Year Selected ---- Bar Chart
       
-      sliderInput("year_bar", "Select your desired year for bar:",
+      sliderInput("year_bar", "Select one year for the bar plot:",
                   min = 1975, max = 2015,
                   value = 1985),
       hr(),
       
       # Input: Selected Cities -----
-      selectInput("cities","Choose some cities to compare",
+      selectInput("cities","Choose some cities to compare:",
                   choices = ucr_crime$city,
                   multiple = TRUE,
                   selected = c("Memphis, Tenn.", "Chicago")),
