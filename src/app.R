@@ -1,6 +1,7 @@
 library(shiny)
 library(plotly)
 library(tidyverse)
+library(DT)
 
 # read in tidy data with factors
 ucr_crime <- read_csv("../data/cleaned_data.csv") %>% 
@@ -55,8 +56,8 @@ ui <- fluidPage(
       tabsetPanel(
         id = 'panel',
         tabPanel("Plot", fluidRow(plotlyOutput("crime_ts"), 
-                                  plotOutput("crime_bar"))),
-        tabPanel('Data', DT::dataTableOutput("ucr_crime_filtered"))
+                                  plotlyOutput("crime_bar"))),
+        tabPanel('Data', dataTableOutput("ucr_crime_filtered"))
       )
     )
   )
@@ -76,7 +77,8 @@ server <- function(input, output) {
     ucr_crime %>% 
       filter(city %in% input$cities, 
              year == input$year_bar) %>% 
-      select(year, type, n, city)
+      select(year, type, n, city) %>% 
+      mutate(city = fct_reorder2(city, type, n))
     })
   
   # --------------------------------------------------------------------
@@ -87,7 +89,8 @@ server <- function(input, output) {
       filter(city %in% input$cities,
             year <= input$year_line[2] & year >= input$year_line[1],
             type == as.name(input$crime_type)) %>% 
-      select(year, n, city)
+      select(year, n, city) %>% 
+      mutate(city = fct_reorder2(city, year, n))
     })
   
   # --------------------------------------------------------------------
@@ -98,26 +101,28 @@ server <- function(input, output) {
     ucr_crime %>% 
       filter(city %in% input$cities,
              year <= input$year_line[2] & year >= input$year_line[1],
-             type == as.name(input$crime_type)) %>%
-      select(city, year, type, n) %>% 
-      arrange(city, year)
+             type == input$crime_type) %>%
+      select(city, year, type, n) 
       })
   
   # Generate all outputs -----
     
   #Bar Chart
-    output$crime_bar <- renderPlot(
+    output$crime_bar <- renderPlotly(
       if(input$crime_type != "Total Violent Crime") {
         ggplot() +
           geom_bar(data = crime_bar_df() %>% filter(type == "Total Violent Crime"),
-                   mapping = aes(y = n, x = city, fill = "Total Violent Crime"),
+                   mapping = aes(y = n, x = city, fill = type),
                    stat = "identity",
                    alpha = 0.8) +
-          geom_bar(data = crime_bar_df() %>% filter(type == as.character(input$crime_type)),
-                   mapping = aes(x = city, y = n, fill = as.character(input$crime_type)),
+          geom_bar(data = crime_bar_df() %>% filter(type == input$crime_type),
+                   mapping = aes(x = city, y = n, fill = type),
                    stat = "identity",
                    alpha = 0.8) +
           labs(fill = "Type") +
+          xlab("Year") +
+          ylab("Crime Rate per 100,000") +
+          ggtitle(paste(input$crime_type, "vs. Total Violent Crime")) +
           theme_bw() +
           scale_fill_viridis_d()
       } else {
@@ -125,6 +130,9 @@ server <- function(input, output) {
           filter(type != "Total Violent Crime") %>% 
           ggplot(aes(x = city, y = n, fill = type)) +
             geom_bar(stat = "identity") +
+            xlab("Year") +
+            ylab("Crime Rate per 100,000") +
+            ggtitle(paste("Composition of Total Violent Crime,", input$year_bar)) +
             theme_bw() +
             scale_fill_viridis_d()
       }
@@ -133,7 +141,7 @@ server <- function(input, output) {
     #Line Chart
     output$crime_ts <- renderPlotly(
       crime_ts_df() %>% 
-        ggplot(aes(x = year, y = n, colour = fct_reorder2(city, year, n))) +
+        ggplot(aes(x = year, y = n, colour = city)) +
           geom_line() +
           geom_point(alpha = 0.5) +
           labs(colour = "Cities") +
