@@ -122,7 +122,7 @@ server <- function(input, output) {
           labs(fill = "Type") +
           xlab("Year") +
           ylab("Crime Rate per 100,000") +
-          ggtitle(paste(input$crime_type, "vs. Total Violent Crime")) +
+          ggtitle(paste(input$crime_type, "vs. Total Violent Crime,", input$year_bar)) +
           theme_bw() +
           scale_fill_viridis_d()
       } else {
