@@ -14,7 +14,7 @@ ui <- fluidPage(
   
   # App title
   titlePanel("US Violent Crime Visualization App", 
-             windowTitle = "Year Range"),
+             windowTitle = "US Violent Crime Visualization App"),
   
   # Sidebar layout with input and output definitions ---- position on right
   sidebarLayout(position = "right",
@@ -25,13 +25,13 @@ ui <- fluidPage(
         'input.panel === "Plot"',
       # Input: Year Range
       sliderInput("year_line", "Select a range of years to view:",
-                  min = 1975, max = 2015, value = c(1975,2015)),
+                  min = 1975, max = 2015, value = c(1975,2015), sep = ""),
       
       # Input: Year Selected ---- Bar Chart
       
       sliderInput("year_bar", "Select one year for the bar plot:",
                   min = 1975, max = 2015,
-                  value = 1985),
+                  value = 1985, sep = ""),
       hr(),
       
       # Input: Selected Cities -----
