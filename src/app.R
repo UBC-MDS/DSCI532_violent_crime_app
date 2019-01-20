@@ -1,6 +1,7 @@
 library(shiny)
-library(plotly)
+library(shinythemes)
 library(tidyverse)
+library(plotly)
 library(DT)
 
 # read in tidy data with factors
@@ -9,6 +10,8 @@ ucr_crime <- read_csv("../data/cleaned_data.csv") %>%
          type = as.factor(type))
 
 ui <- fluidPage(
+  # theme
+  theme = shinytheme("yeti"),
   
   # Panels
   
