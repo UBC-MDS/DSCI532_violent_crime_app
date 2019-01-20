@@ -1,0 +1,40 @@
+---
+title: "App Documentation"
+output:
+  pdf_document: default
+  github_document: default
+---
+
+## App Overview
+```{r fig.width=8, fig.height=8,echo=FALSE}
+library(png)
+library(grid)
+library(gridExtra)
+img1 <- rasterGrob(as.raster(readPNG("../img/app_screenshot.png")), interpolate = FALSE)
+img2 <- rasterGrob(as.raster(readPNG("../img/data_table.png")), interpolate = FALSE)
+grid.arrange(img1, img2, ncol = 2)
+```     
+
+The images above show the two tabs of our app. The image on the left shows the "Plot" tab, which contains a line plot on top, and a bar plot below. The side panel is used to filter the data and update the plots. The image on the right shows the "Data" tab, which contains a table of the data being used to generate the plot. It can be filtered and sorted.   
+
+
+## User Inputs  
+```{r fig.width=3, fig.height=5,echo=FALSE}
+
+img1 <-  rasterGrob(as.raster(readPNG("../img/sidebar.png")), interpolate = FALSE)
+img2 <-  rasterGrob(as.raster(readPNG("../img/dropdown_menu.png")), interpolate = FALSE)
+grid.arrange(img1, img2, ncol = 2)
+```   
+
+The images above show the sidebar panel of our app where users enter inputs to filter the data and update the plots. With the sliders, users select a range of years for the line plot and a single year for the bar plot. They choose cities to compare using the dropdown menu, where they can click or type to select cities. Finally, users select the type of crime rate they wish to view using the radio buttons. 
+
+## Interactive Features
+```{r fig.width=7, fig.height=5,echo=FALSE}
+
+img1 <-  rasterGrob(as.raster(readPNG("../img/hover_line.png")), interpolate = FALSE)
+img2 <-  rasterGrob(as.raster(readPNG("../img/hover_bar.png")), interpolate = FALSE)
+grid.arrange(img1, img2, ncol = 2)
+
+```    
+
+In our app, we render the plots as plotly objects to allow the user to interact with the plots. Above, we demonstrate the hover effect, where users can hover over a data point and see the precise figures.  The plotly objects also allow users to zoom and pan.  
