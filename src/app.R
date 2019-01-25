@@ -32,16 +32,17 @@ ui <- fluidPage(
       
       # Input: Year Selected ---- Bar Chart
       
-      sliderInput("year_bar", "Select one year for the bar plot:",
-                  min = 1975, max = 2015,
-                  value = 1985, sep = ""),
+      selectInput("year_bar", "Select one year for the bar plot:",
+                  choices = ucr_crime$year,
+                  selected = 1),
       hr(),
       
       # Input: Selected Cities -----
-      selectInput("cities","Choose some cities to compare:",
+      selectizeInput("cities","Choose some cities to compare:",
                   choices = ucr_crime$city,
                   multiple = TRUE,
-                  selected = c("Memphis, Tenn.", "Chicago")),
+                  selected = c("Memphis, Tenn.", "Chicago"),
+                  options = list(maxItems = 6)),
       
       # Input: Select Crime type ----
       radioButtons("crime_type", "Crime Type:",
@@ -72,7 +73,7 @@ ui <- fluidPage(
 server <- function(input, output) {
   
   # Reactive expression to create data frame of all input values ----
-  
+
   # --------------------------------------------------------------------
   #                            Data frame for Bar Chart
   # --------------------------------------------------------------------
@@ -123,9 +124,10 @@ server <- function(input, output) {
                    stat = "identity",
                    alpha = 0.8) +
           labs(fill = "Type") +
-          xlab("Year") +
+          xlab("") +
           ylab("Crime Rate per 100,000") +
           ggtitle(paste(input$crime_type, "vs. Total Violent Crime,", input$year_bar)) +
+          coord_flip() +
           theme_bw() +
           scale_fill_viridis_d()
       } else {
@@ -133,9 +135,10 @@ server <- function(input, output) {
           filter(type != "Total Violent Crime") %>% 
           ggplot(aes(x = city, y = n, fill = type)) +
             geom_bar(stat = "identity") +
-            xlab("Year") +
+            xlab("") +
             ylab("Crime Rate per 100,000") +
             ggtitle(paste("Composition of Total Violent Crime,", input$year_bar)) +
+            coord_flip() +
             theme_bw() +
             scale_fill_viridis_d()
       }
@@ -152,7 +155,7 @@ server <- function(input, output) {
           xlab("Year") +
           ggtitle(paste(input$crime_type, "Rates", input$year_line[1], "-", input$year_line[2])) +
           theme_bw() +
-          scale_colour_viridis_d()
+          scale_colour_viridis_d(option = "C")
     )
       
     
