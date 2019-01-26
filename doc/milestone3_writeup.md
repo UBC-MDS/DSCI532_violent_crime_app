@@ -5,11 +5,11 @@ Milestone 3 Writeup
 
 ##### Sliders
 
-Our reviewers were able to navigate our app fairly well, but there were a few points of confusion. Most notably, both pairs of reviewers commented on the use of the sliders to enter dates. While our reviewers found the slider for selecting the range of years for the line plot intuitive, they found the slider for selecting a single year for the bar plot confusing. They felt the slider made it seem like they were selecting another range of years rather than a single year. We found these comments to be valid and very helpful. We have changed the slider for the bar to chart to a drop down menu, which should make it much clearer that only one year is to be selected.
+Our reviewers were able to navigate our app fairly well, but there were a few points of confusion. Most notably, both pairs of reviewers commented on the use of the sliders to enter dates. While our reviewers found the slider for selecting the range of years for the line chart intuitive, they found the slider for selecting a single year for the bar chart confusing. They felt the slider made it seem like they were selecting another range of years rather than a single year. We found these comments to be valid and very helpful. We have changed the slider for the bar chart to a drop down menu, which should make it much clear that only one year is to be selected.
 
 ##### Colour Schemes
 
-There were also some comments regarding the colour schemes. In particular, one pair of reviewers commented that the same colours were used in the line plot and the bar plot, but the colours represented different things in each plot. We agree that this could be confusing, so we have used different colour schemes for the line chart and the bar charts.
+There were also some comments regarding the colour schemes. In particular, one pair of reviewers commented that the same colours were used in the line chart and the bar chart, but the colours represented different things in each chart. We agree that this could be confusing, so we have used different colour schemes for the line and bar charts.
 
 ------------------------------------------------------------------------
 
@@ -22,13 +22,13 @@ Some other feedback we received but didn't implement because we found it less he
 
 Overall, the ojective for our app has not changed. We continue to work towards building an app that illustrates the differences in violent crime patterns accross cities. We have, however, made some changes to the design and to the user interface in addition to the changes we made addressing reviewer comments.
 
-##### Cluttered Line Plot
+##### Cluttered Line Chart
 
-Firstly, we noticed that when too many cities were added, the line plot became cluttered and hard to read. To address this, we decided to limit the number of cities users can select to six.
+Firstly, we noticed that when too many cities were added, the line chart became cluttered and hard to read. To address this, we decided to limit the number of cities users can select to six.
 
 ##### Overlapping Labels
 
-Secondly, the city labels on the bar plot sometimes overlapped and became illegible. Limiting the number of cities did help address this problem as well, but when cities with long names were selected, the labels still overlapped. We decided to rotate the bar chart so that the bars run horizontally; doing so allowed the city names to each be displayed on a separate line.
+Secondly, the city labels on the bar chart sometimes overlapped and became illegible. Limiting the number of cities did help address this problem as well, but when cities with long names were selected, the labels still overlapped. We decided to rotate the bar chart so that the bars run horizontally; doing so allowed the city names to each be displayed on a separate line.
 
 ##### Other Issues
 
