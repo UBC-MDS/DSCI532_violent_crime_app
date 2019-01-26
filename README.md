@@ -13,7 +13,7 @@ A shiny app will allow users to compare the violent crime rates and patterns in 
 ### Repo Contents
 
 #### Milestone 1
-- [Proposal](https://github.com/UBC-MDS/DSCI532_violent_crime_app/blob/master/doc/proposal.md)
+- [Proposal](https://github.com/UBC-MDS/DSCI532_violent_crime_app/tree/v1.0/doc/proposal.md)
 
 #### Milestone 2
 - [Developed Shiny App](https://aldenchen.shinyapps.io/DSCI-532_Violent-Crime-App/)
@@ -32,7 +32,7 @@ A shiny app will allow users to compare the violent crime rates and patterns in 
 ----
 
 ### Releases:
-- Proposal: [V1.0](https://github.com/UBC-MDS/DSCI532_violent_crime_app/tree/v1.0)
+- Milestone 1: [V1.0](https://github.com/UBC-MDS/DSCI532_violent_crime_app/tree/v1.0)
 - Milestone 2: [V2.0](https://github.com/UBC-MDS/DSCI532_violent_crime_app/tree/v2.0)  
 - Milestone 3: [V3.0](https://github.com/UBC-MDS/DSCI532_violent_crime_app/tree/v3.0)
 
