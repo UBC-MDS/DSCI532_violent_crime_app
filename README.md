@@ -1,6 +1,6 @@
 # DSCI 532 Violent Crime App  
 
-A shiny app will allow users to compare the violent crime rates and patterns in violent crime between multiple cities in US.
+A shiny app to allow users to compare the violent crime rates and patterns across multiple US cities.
 
 ----
 
