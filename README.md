@@ -4,7 +4,7 @@ A shiny app will allow users to compare the violent crime rates and patterns in 
 
 ----
 
-### Project Creators:
+### Project Creators
 - [Alden Chen](https://github.com/aldenchen)
 - [Fan Wu](https://github.com/fwu03)
 
@@ -31,7 +31,7 @@ A shiny app will allow users to compare the violent crime rates and patterns in 
 
 ----
 
-### Releases:
+### Releases
 - Milestone 1: [V1.0](https://github.com/UBC-MDS/DSCI532_violent_crime_app/tree/v1.0)
 - Milestone 2: [V2.0](https://github.com/UBC-MDS/DSCI532_violent_crime_app/tree/v2.0)  
 - Milestone 3: [V3.0](https://github.com/UBC-MDS/DSCI532_violent_crime_app/tree/v3.0)
