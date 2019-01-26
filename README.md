@@ -2,9 +2,13 @@
 
 A shiny app will allow users to compare the violent crime rates and patterns in violent crime between multiple cities in US.
 
+----
+
 ### Project Creators:
 - [Alden Chen](https://github.com/aldenchen)
 - [Fan Wu](https://github.com/fwu03)
+
+----
 
 ### Repo Contents
 
@@ -22,6 +26,8 @@ A shiny app will allow users to compare the violent crime rates and patterns in 
 - Feedback Session:
   + Feedback for [Mental_Health_Analyzer](https://github.com/UBC-MDS/DSCI_532_Mental_Health_Analyzer/issues/8)
   + Feedback for [Visualizing crimes in US](https://github.com/UBC-MDS/DSCI_532_Crime_Blei7_simchi/issues/10)
+
+----
 
 ### Releases:
 - Proposal: [V1.0](https://github.com/UBC-MDS/DSCI532_violent_crime_app/tree/v1.0)
