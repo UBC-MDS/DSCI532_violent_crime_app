@@ -42,6 +42,7 @@ ui <- navbarPage(
       # plots
       mainPanel(
         plotlyOutput("crime_ts"), 
+        hr(),
         plotlyOutput("crime_bar")
       )
     ),
@@ -50,7 +51,7 @@ ui <- navbarPage(
     tabPanel("Data", 
              mainPanel(
                dataTableOutput("ucr_crime_filtered")
-              )
+             )
     )
 )
 
@@ -129,7 +130,7 @@ server <- function(input, output) {
           ggtitle(paste(input$crime_type, "vs. Total Violent Crime,", input$year_bar)) +
           coord_flip() +
           theme_bw() +
-          scale_fill_viridis_d()
+          scale_fill_brewer(type = "qual", palette = "Pastel1")
       } else {
         crime_bar_df() %>%
           filter(type != "Total Violent Crime") %>% 
@@ -141,7 +142,7 @@ server <- function(input, output) {
             ggtitle(paste("Composition of Total Violent Crime,", input$year_bar)) +
             coord_flip() +
             theme_bw() +
-            scale_fill_viridis_d()
+            scale_fill_brewer(type = "qual", palette = "Pastel1")
       }
       )
     
@@ -156,7 +157,8 @@ server <- function(input, output) {
           xlab("Year") +
           ggtitle(paste(input$crime_type, "Rates", input$year_line[1], "-", input$year_line[2])) +
           theme_bw() +
-          scale_colour_viridis_d(option = "C")
+          #scale_colour_viridis_d(option = "C")
+          scale_colour_brewer(type = "qual", palette = "Dark2")
     )
       
     
