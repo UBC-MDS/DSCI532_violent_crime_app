@@ -17,9 +17,6 @@ ui <- navbarPage(
    # First Tab for Plots
   tabPanel("Plot",
       sidebarPanel(
-        # Input: Years for line chart
-        sliderInput("year_line", "Select a range of years to view:",
-                    min = 1975, max = 2015, value = c(1975,2015), sep = ""),
         # Input: Cities
         selectizeInput("cities","Choose up to 6 cities to compare:",
                     choices = ucr_crime$city,
@@ -34,11 +31,13 @@ ui <- navbarPage(
                                  `Aggravated Assault` = 'Aggravated Assault',
                                  `Total Violent Crime` = 'Total Violent Crime'),
                      selected = 'Total Violent Crime'),
+        # Input: Years for line chart
+        sliderInput("year_line", "Select a range of years to view:",
+                    min = 1975, max = 2015, value = c(1975,2015), sep = ""),
+        
         hr(),
         # Input: year for bar chart
-        selectInput("year_bar", "Select one year for the bar plot:",
-                    choices = ucr_crime$year,
-                    selected = 1)
+        uiOutput('years_interval')
       ),
       # plots
       mainPanel(
@@ -64,6 +63,11 @@ server <- function(input, output) {
   #                            Data frame for Bar Chart
   # --------------------------------------------------------------------
   crime_bar_df <- reactive({
+    # Error message for empty input
+    validate(
+      need(input$cities != "", "Please select at least one city")
+    )
+    # Data frame
     ucr_crime %>% 
       filter(city %in% input$cities, 
              year == input$year_bar) %>% 
@@ -75,6 +79,11 @@ server <- function(input, output) {
   #                            Data frame for line Chart
   # --------------------------------------------------------------------
   crime_ts_df <- reactive({
+    # Error message for empty input
+    validate(
+      need(input$cities != "", "Please select at least one city")
+    )
+    # Data frame
     ucr_crime %>% 
       filter(city %in% input$cities,
             year <= input$year_line[2] & year >= input$year_line[1],
@@ -88,6 +97,11 @@ server <- function(input, output) {
   # --------------------------------------------------------------------
   
   ucr_crime_df <- reactive({
+    # Error message for empty input
+    validate(
+      need(input$cities != "", "Please select at least one city")
+    )
+    # Data frame
     ucr_crime %>% 
       filter(city %in% input$cities,
              year <= input$year_line[2] & year >= input$year_line[1],
@@ -150,6 +164,13 @@ server <- function(input, output) {
     output$ucr_crime_filtered <- DT::renderDataTable({
       DT::datatable(ucr_crime_df(), options = list(lengthMenu = c(30, 50, 100), pageLength = 10))
       })
+    
+    
+    #Other components
+    output$years_interval <- renderUI(
+      selectInput("year_bar", "Select one year for the bar plot:",
+                  choices = unique(c(ucr_crime$year[which(ucr_crime$year <= input$year_line[2] & ucr_crime$year >= input$year_line[1])])),
+                  selected = 1))
   }
   
 # Run the application 
