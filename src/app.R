@@ -5,69 +5,55 @@ library(plotly)
 library(DT)
 
 # read in tidy data with factors
-ucr_crime <- read_csv("../data/cleaned_data.csv") %>% 
+ucr_crime <- read_csv("cleaned_data.csv") %>% 
   mutate(city = as.factor(city),
          type = as.factor(type))
 
-ui <- fluidPage(
-  # theme
+ui <- navbarPage(
+  # theme and title
   theme = shinytheme("yeti"),
-  
-  # Panels
-  
-  # App title
-  titlePanel("US Violent Crime Visualization App", 
-             windowTitle = "US Violent Crime Visualization App"),
-  
-  # Sidebar layout with input and output definitions ---- position on right
-  sidebarLayout(position = "right",
-    
-    # Sidebar to demonstrate various slider options ----            
-    sidebarPanel(
-      conditionalPanel(
-        'input.panel === "Plot"',
-      # Input: Year Range
-      sliderInput("year_line", "Select a range of years to view:",
-                  min = 1975, max = 2015, value = c(1975,2015), sep = ""),
-      
-      # Input: Year Selected ---- Bar Chart
-      
-      selectInput("year_bar", "Select one year for the bar plot:",
-                  choices = ucr_crime$year,
-                  selected = 1),
-      hr(),
-      
-      # Input: Selected Cities -----
-      selectizeInput("cities","Choose some cities to compare:",
-                  choices = ucr_crime$city,
-                  multiple = TRUE,
-                  selected = c("Memphis, Tenn.", "Chicago"),
-                  options = list(maxItems = 6)),
-      
-      # Input: Select Crime type ----
-      radioButtons("crime_type", "Crime Type:",
-                   choices = c(Rape = 'Rape',
-                               Homicide = 'Homicide',
-                               Robbery = 'Robbery',
-                               `Aggravated Assault` = 'Aggravated Assault',
-                               `Total Violent Crime` = 'Total Violent Crime'),
-                   selected = 'Total Violent Crime')
+  title = "US Violent Crime Visualization App",
+ 
+   # First Tab for Plots
+  tabPanel("Plot",
+      sidebarPanel(
+        # Input: Years for line chart
+        sliderInput("year_line", "Select a range of years to view:",
+                    min = 1975, max = 2015, value = c(1975,2015), sep = ""),
+        # Input: Cities
+        selectizeInput("cities","Choose up to 6 cities to compare:",
+                    choices = ucr_crime$city,
+                    multiple = TRUE,
+                    selected = c("Memphis, Tenn.", "Chicago"),
+                    options = list(maxItems = 6)),
+        # Input: Crime type
+        radioButtons("crime_type", "Crime Type:",
+                     choices = c(Rape = 'Rape',
+                                 Homicide = 'Homicide',
+                                 Robbery = 'Robbery',
+                                 `Aggravated Assault` = 'Aggravated Assault',
+                                 `Total Violent Crime` = 'Total Violent Crime'),
+                     selected = 'Total Violent Crime'),
+        hr(),
+        # Input: year for bar chart
+        selectInput("year_bar", "Select one year for the bar plot:",
+                    choices = ucr_crime$year,
+                    selected = 1)
+      ),
+      # plots
+      mainPanel(
+        plotlyOutput("crime_ts"), 
+        plotlyOutput("crime_bar")
       )
     ),
-
-    # Main panel for displaying outputs -----
-    mainPanel(
-      tabsetPanel(
-        id = 'panel',
-        tabPanel("Plot", fluidRow(plotlyOutput("crime_ts"), 
-                                  plotlyOutput("crime_bar"))),
-        tabPanel('Data', dataTableOutput("ucr_crime_filtered"))
-      )
+    
+  # Second Panel for Data Table
+    tabPanel("Data", 
+             mainPanel(
+               dataTableOutput("ucr_crime_filtered")
+              )
     )
-  )
 )
-
-
 
 # Define server logic required to draw a histogram and a time series
 server <- function(input, output) {
@@ -123,7 +109,7 @@ server <- function(input, output) {
                    mapping = aes(x = city, y = n, fill = type),
                    stat = "identity",
                    alpha = 0.8) +
-          labs(fill = "Type") +
+          labs(fill = "") +
           xlab("") +
           ylab("Crime Rate per 100,000") +
           ggtitle(paste(input$crime_type, "vs. Total Violent Crime,", input$year_bar)) +
@@ -137,6 +123,7 @@ server <- function(input, output) {
             geom_bar(stat = "identity") +
             xlab("") +
             ylab("Crime Rate per 100,000") +
+            labs(fill = "") +
             ggtitle(paste("Composition of Total Violent Crime,", input$year_bar)) +
             coord_flip() +
             theme_bw() +
@@ -150,7 +137,7 @@ server <- function(input, output) {
         ggplot(aes(x = year, y = n, colour = city)) +
           geom_line() +
           geom_point(alpha = 0.5) +
-          labs(colour = "Cities") +
+          labs(colour = "") +
           ylab(paste(input$crime_type , "per 100,000")) +
           xlab("Year") +
           ggtitle(paste(input$crime_type, "Rates", input$year_line[1], "-", input$year_line[2])) +
