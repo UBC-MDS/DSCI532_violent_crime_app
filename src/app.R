@@ -51,7 +51,7 @@ ui <- navbarPage(
     tabPanel("Data", 
              mainPanel(
                dataTableOutput("ucr_crime_filtered")
-              )
+             )
     )
 )
 
@@ -142,7 +142,8 @@ server <- function(input, output) {
           xlab("Year") +
           ggtitle(paste(input$crime_type, "Rates", input$year_line[1], "-", input$year_line[2])) +
           theme_bw() +
-          scale_colour_viridis_d(option = "C")
+          #scale_colour_viridis_d(option = "C")
+          scale_colour_brewer(type = "qual", palette = "Set1")
     )
       
     
