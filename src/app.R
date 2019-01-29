@@ -18,13 +18,13 @@ ui <- navbarPage(
   tabPanel("Plot",
       sidebarPanel(
         # Input: Cities
-        selectizeInput("cities","Choose up to 6 cities to compare:",
+        selectizeInput("cities", h5("Choose up to 6 cities to compare:"),
                     choices = ucr_crime$city,
                     multiple = TRUE,
                     selected = c("Memphis, Tenn.", "Chicago"),
                     options = list(maxItems = 6)),
         # Input: Crime type
-        radioButtons("crime_type", "Crime Type:",
+        radioButtons("crime_type", h5("Crime Type:"),
                      choices = c(Rape = 'Rape',
                                  Homicide = 'Homicide',
                                  Robbery = 'Robbery',
@@ -32,7 +32,7 @@ ui <- navbarPage(
                                  `Total Violent Crime` = 'Total Violent Crime'),
                      selected = 'Total Violent Crime'),
         # Input: Years for line chart
-        sliderInput("year_line", "Select a range of years to view:",
+        sliderInput("year_line", h5("Select a range of years to view:"),
                     min = 1975, max = 2015, value = c(1975,2015), sep = ""),
         
         hr(),
@@ -170,7 +170,7 @@ server <- function(input, output) {
     
     #Other components
     output$years_interval <- renderUI(
-      selectInput("year_bar", "Select one year for the bar plot:",
+      selectInput("year_bar", h5("Select one year for the bar plot:"),
                   choices = unique(c(ucr_crime$year[which(ucr_crime$year <= input$year_line[2] & ucr_crime$year >= input$year_line[1])])),
                   selected = 1))
   }
