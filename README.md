@@ -36,8 +36,8 @@ A shiny app to allow users to compare the violent crime rates and patterns acros
 ----
 
 ### Releases
-- Milestone 1: [V1.0](https://github.com/UBC-MDS/DSCI532_violent_crime_app/blob/v1.0)
-- Milestone 2: [V2.0](https://github.com/UBC-MDS/DSCI532_violent_crime_app/blob/v2.0)  
-- Milestone 3: [V3.0](https://github.com/UBC-MDS/DSCI532_violent_crime_app/blob/v3.0)
-- Milestone 4: [V4.0](https://github.com/UBC-MDS/DSCI532_violent_crime_app/blob/v4.0)
+- Milestone 1: [V1.0](https://github.com/UBC-MDS/DSCI532_violent_crime_app/tree/v1.0)
+- Milestone 2: [V2.0](https://github.com/UBC-MDS/DSCI532_violent_crime_app/tree/v2.0)  
+- Milestone 3: [V3.0](https://github.com/UBC-MDS/DSCI532_violent_crime_app/tree/v3.0)
+- Milestone 4: [V4.0](https://github.com/UBC-MDS/DSCI532_violent_crime_app/tree/v4.0)
 
