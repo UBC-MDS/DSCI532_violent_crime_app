@@ -11,7 +11,7 @@ We changed the ordering of the user inputs on the sidebar panel. There are two i
 
 ##### Updated Design and Layout
 
-We added a dark navigation bar to the top of our app that contains the title of our app and the two tabs. In our old layout, the title was at the top of the page, and the tabs for "Plot"" and "Data" were close to the first chart title, which seemed confusing. Furthermore, the black bar clearly differentiates the title of the app from the title of the chart. We have also added a separater between the two charts since before the labels from the top chart were very close to the title of the bottom chart. These changes improve the readability of the charts.
+We added a dark navigation bar to the top of our app that contains the title of our app and the two tabs. In our old layout, the title was at the top of the page, and the tabs for "Plot" and "Data" were close to the first chart title, which seemed confusing. Furthermore, the black bar clearly differentiates the title of the app from the title of the chart. We have also added a separater between the two charts since before the labels from the top chart were very close to the title of the bottom chart. These changes improved the readability of the charts.
 
 ##### Changes to the Plots: Colour Scheme and Labels
 
@@ -21,7 +21,8 @@ We also removed some of the axis and legend labels since it was clear what was b
 
 ##### Some Bug Fixes
 
-Previously, an error appeared when no cities were selected. We have now added a message that says "Please select at least one city." The error message made it seem like the app had crashed, so catching the error and adding a message makes it clear to users that they just need to enter some inputs to continue using the app.
+Previously, an error appeared when no cities were selected. We have now added a message that says: "Please select at least one city." The error message made it seem like the app had crashed, so catching the error and adding a message makes it clear to users that they just need to enter some inputs to continue using the app.
+
 There was also a small issue with the Data tab that we resolved this week. The menu to select the number of entries to view on one screen had four options, but sometimes only three options were displayed. We have fixed this so that the four options are always available.
 
 ### Remaining Issues, Challenges, and Reflections
@@ -33,7 +34,7 @@ There was also a small issue with the Data tab that we resolved this week. The m
 
 ##### Challenges
 
-Some of the fancier features that we would have liked to have in our app turned out to be more harder to implement than we expected. In particular, adding linked views, so that the year for the bar chart could be chosen by clicking a point on the line chart, was more challenging than expected. Initially, this feature seemed intuitive since we often see it in interactive visualizations, but implementing and debugging it in our app was labourious. This was partly because we were not very familiar with plotly charts. We were unable to add this feature to our app; however, in the end, we feel that we made good choices in the balancing fancy features and delivering a fully functional app.
+Some of the fancier features that we would have liked to have in our app turned out to be harder to implement than we expected. In particular, adding linked views, so that the year for the bar chart could be chosen by clicking a point on the line chart, was more challenging than expected. Initially, this feature seemed intuitive since we often see it in interactive visualizations, but implementing and debugging it in our app was labourious. This was partly because we were not very familiar with plotly charts. We were unable to add this feature to our app; however, in the end, we feel that we made good choices in balancing fancy features with delivering a fully functional app.
 
 ##### Things We Would Do Differently
 
