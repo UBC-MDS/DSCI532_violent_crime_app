@@ -3,7 +3,7 @@ Milestone 4 Writeup
 
 ### Final Improvements
 
-This week we focussed fixing a few bugs and making it easier for users to enter inputs and view charts.
+This week we focussed on fixing a few bugs and making it easier for users to enter inputs and read charts.
 
 ##### Updated User Interface
 
@@ -15,24 +15,25 @@ We added a dark navigation bar to the top of our app that contains the title of 
 
 ##### Changes to the Plots: Colour Scheme and Labels
 
-We made another change to the colour scheme this week. The old colour scheme used a bright yellow colour in the line chart that was difficult to see. Yellow is no longer used, so the chart easier to read.
+We made another change to the colour scheme this week. The old colour scheme used a jarring yellow colour in the line chart that was difficult to see. The very bright yellow is no longer used, so the chart is easier to read.
 
-We also removed some of the axis and legend labels since it was clear what was being listed. In the legend for the line chart, we removed the label "Cities"; and in the legend for the bar chart, we removed the label "Type". Previously, the legend titles were cluttering the design because they were positioned too close to the title.
+We also removed some of the axis and legend labels since it was clear what was being listed. For both charts, we removed the label "Cities"; and in the legend for the bar chart, we removed the label "Type". Previously, the legend titles were somewhat confusing because they were positioned too close to the title.
 
 ##### Some Bug Fixes
 
 Previously, an error appeared when no cities were selected. We have now added a message that says "Please select at least one city." The error message made it seem like the app had crashed, so catching the error and adding a message makes it clear to users that they just need to enter some inputs to continue using the app.
-
-There was also a small issue with the Data tab that we resolved this week. The menu to select the number of entries to view on one screen had four options, but after a selection was made, one of the options was missing. We have fixed this so that users can always select between viewing 10, 30, 50, or 100 entries.
+There was also a small issue with the Data tab that we resolved this week. The menu to select the number of entries to view on one screen had four options, but sometimes only three options were displayed. We have fixed this so that the four options are always available.
 
 ### Remaining Issues, Challenges, and Reflections
 
 ##### Remaining Issues We Didn't Fix
 
 -   When a small range of years is selected (i.e.&lt; 3), the labels of the x-axis on the line chart are not integers. Ideally, the axis labels should still be integer values.
--   When data are not available for a particular city, the city shows up in the legend, but not in the line chart. For example, national averages are only available for homicide and total violent crime. When "National" is selected as one of the cities and a different type of crime is selected, "National" shows up in the legend, but there is nothing on the plot. We would like adjust the list of cities so that cities with no data for the selected range are not listed.
+-   When data are not available for a particular city, the city shows up in the legend, but not in the line chart. For example, national averages are only available for homicide and total violent crime. When "National" is selected as one of the cities and a different type of crime is selected, "National" shows up in the legend, but there is nothing on the plot. It would be nice if the the list of cities adjusted so that cities with no data for the selected range are not listed. Alternatively, a short message could be displayed in those cases.
 
 ##### Challenges
+
+Some of the fancier features that we would have liked to have in our app turned out to be more difficult to implement. In particular, adding linked views, so that the year for the bar chart could be chosen by clicking a point on the line chart, was more challenging than expected. Initially, this feature seemed intuitive since we often see it in interactive visualizations, but implementing and debugging it in our app was labourious. This was partly because we were not very familiar with plotly graphs.
 
 ##### Things We Would Do Differently
 
