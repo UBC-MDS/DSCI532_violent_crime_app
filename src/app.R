@@ -164,7 +164,7 @@ server <- function(input, output) {
     
     #Dataset
     output$ucr_crime_filtered <- DT::renderDataTable({
-      DT::datatable(ucr_crime_df(), options = list(lengthMenu = c(30, 50, 100), pageLength = 10))
+      DT::datatable(ucr_crime_df(), options = list(lengthMenu = c(10, 30, 50, 100), pageLength = 10))
       })
     
     
