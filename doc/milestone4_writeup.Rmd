@@ -29,3 +29,9 @@ There was also a small issue with the Data tab that we resolved this week. The m
 
 ### Remaining Issues and Challenges
 
+##### Remaining Issues We Didn't Fix
+- When a small range of years is selected (i.e.< 3), the labels of the x-axis on the line chart are not integers. Ideally, the axis labels should still be integer values.  
+- When data are not available for a particular city, the city shows up in the legend, but not in the line chart. For example, national averages are only available for homicide and total violent crime. When "National" is selected as one of the cities and another type of crime is selected, "National" shows up in the legend, but there is nothing on the plot. We would like to have a small message explaining that data are not available in these cases.
+
+##### Challenges
+

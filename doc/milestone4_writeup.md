@@ -26,3 +26,10 @@ Previously there was an issue of an error message appearing when no cities were 
 There was also a small issue with the Data tab that we resolved this week. The menu to select the number of entries to view on one screen had four options, but after a selection was made, one of the options was missing. We have fixed this so that users can always select between viewing 10, 30, 50, or 100 entries.
 
 ### Remaining Issues and Challenges
+
+##### Remaining Issues We Didn't Fix
+
+-   When a small range of years is selected (i.e.&lt; 3), the labels of the x-axis on the line chart are not integers. Ideally, the axis labels should still be integer values.
+-   When data are not available for a particular city, the city shows up in the legend, but not in the line chart. For example, national averages are only available for homicide and total violent crime. When "National" is selected as one of the cities and another type of crime is selected, "National" shows up in the legend, but there is nothing on the plot. We would like to have a small message explaining that data are not available in these cases.
+
+##### Challenges
