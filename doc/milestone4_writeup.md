@@ -7,29 +7,32 @@ This week we focussed fixing a few bugs and making it easier for users to enter 
 
 ##### Updated User Interface
 
-We made some changes to the user interface that make our app easier to use. We have changed the ordering of the user inputs on the sidebar panel. There are two inputs, cities and crime type, that are used to filter data for both plots. Since these are global settings, it made sense to move these to the top of the panel. The last two inputs are now the range of years for the line chart and a single year for the bar chart. We have added dynamic filtering so that the year for the bar chart is restricted to the range of years in the line chart.
+We changed the ordering of the user inputs on the sidebar panel. There are two inputs, cities and crime type, that are used to filter data for both plots. Since these are global settings, it made sense to move these to the top of the panel. The last two inputs are now the range of years for the line chart and a single year for the bar chart. We have added dynamic filtering so that the year for the bar chart is restricted to the range of years in the line chart. We feel this setup is more intituitive.
 
 ##### Updated Design and Layout
 
-We added a dark navigation bar to the top of our app that contains the title of our app and the two tabs. In our old layout, the title was at the top of the page, and the tabs for "Plot"" and "Data" were close to the chart title, which seemed confusing. We feel it makes sense to move them away from the plots and next to the title. Further, the black bar clearly differentiates the title of the app from the title of the chart. We have also added a separater between the two plots since before the labels from the top chart were very close to the title of the bottom chart.
+We added a dark navigation bar to the top of our app that contains the title of our app and the two tabs. In our old layout, the title was at the top of the page, and the tabs for "Plot"" and "Data" were close to the first chart title, which seemed confusing. Furthermore, the black bar clearly differentiates the title of the app from the title of the chart. We have also added a separater between the two charts since before the labels from the top chart were very close to the title of the bottom chart.
 
 ##### Changes to the Plots: Colour Scheme and Labels
 
-We made another change to the colour scheme this week. The old colour scheme used a bright yellow colour in the line chart that was difficult to see. We changed the colour scheme so that yellow is no longer used. This makes the chart easier to read.
+We made another change to the colour scheme this week. The old colour scheme used a bright yellow colour in the line chart that was difficult to see. Yellow is no longer used, so the chart easier to read.
 
-We also removed some of the axis and legend labels since it was clear what was being listed. In the legend for the line chart, we removed the label "Cities"; and in the legend for the bar chart, we removed the label "Type". Previously, the legend titles were cluttering the design because they were positioned close to the title. Removing them makes the charts cleaner and easier to read.
+We also removed some of the axis and legend labels since it was clear what was being listed. In the legend for the line chart, we removed the label "Cities"; and in the legend for the bar chart, we removed the label "Type". Previously, the legend titles were cluttering the design because they were positioned close to the title.
 
 ##### Some Bug Fixes
 
-Previously an error message appeared when no cities were selected. We have now added a message that says "Please select at least one city." The error message made it seem like the app had crashed, so catching the error and adding a message makes it clear to users that they just need to enter some inputs to continue using the app.
-
+Previously an error appeared when no cities were selected. We have now added a message that says "Please select at least one city." The error message made it seem like the app had crashed, so catching the error and adding a message makes it clear to users that they just need to enter some inputs to continue using the app.
 There was also a small issue with the Data tab that we resolved this week. The menu to select the number of entries to view on one screen had four options, but after a selection was made, one of the options was missing. We have fixed this so that users can always select between viewing 10, 30, 50, or 100 entries.
 
-### Remaining Issues and Challenges
+### Remaining Issues, Challenges, and Reflections
 
 ##### Remaining Issues We Didn't Fix
 
 -   When a small range of years is selected (i.e.&lt; 3), the labels of the x-axis on the line chart are not integers. Ideally, the axis labels should still be integer values.
--   When data are not available for a particular city, the city shows up in the legend, but not in the line chart. For example, national averages are only available for homicide and total violent crime. When "National" is selected as one of the cities and a different type of crime is selected, "National" shows up in the legend, but there is nothing on the plot. We would like to have a small message explaining that data are not available in these cases.
+-   When data are not available for a particular city, the city shows up in the legend, but not in the line chart. For example, national averages are only available for homicide and total violent crime. When "National" is selected as one of the cities and a different type of crime is selected, "National" shows up in the legend, but there is nothing on the plot. We would like adjust the list of cities so that cities with missing data for the selected range are not listed.
 
 ##### Challenges
+
+##### Things We Would Do Differently
+
+One thing that we would probably do differently would be spending more time on the initial design and planning of the app before starting to implement it. Often when we wanted to update or add features, we had to make major revisions to the source code. It would have been a good idea to spend more time planning out our design and soliciting feedback on a simple mockup before development. In doing so, we would be able to implement our app with key features from the start, instead of writing the code and then making major revisions. It would also have been helpful to solicit feedback from users at multiple points in the development process to test out whether changes we made actually imporved the app.
