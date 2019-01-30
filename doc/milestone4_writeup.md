@@ -33,7 +33,7 @@ There was also a small issue with the Data tab that we resolved this week. The m
 
 ##### Challenges
 
-Some of the fancier features that we would have liked to have in our app turned out to be more difficult to implement. In particular, adding linked views, so that the year for the bar chart could be chosen by clicking a point on the line chart, was more challenging than expected. Initially, this feature seemed intuitive since we often see it in interactive visualizations, but implementing and debugging it in our app was labourious. This was partly because we were not very familiar with plotly graphs.
+Some of the fancier features that we would have liked to have in our app turned out to be more harder to implement than we expected. In particular, adding linked views, so that the year for the bar chart could be chosen by clicking a point on the line chart, was more challenging than expected. Initially, this feature seemed intuitive since we often see it in interactive visualizations, but implementing and debugging it in our app was labourious. This was partly because we were not very familiar with plotly charts. We were unable to add this feature to our app; however, in the end, we feel that we made good choices in the balancing fancy features and delivering a fully functional app.
 
 ##### Things We Would Do Differently
 
