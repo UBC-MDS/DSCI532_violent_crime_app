@@ -7,11 +7,11 @@ This week we focussed fixing a few bugs and making it easier for users to enter 
 
 ##### Updated User Interface
 
-We made some changes to the user interface that make our app easier to use. We have changed the ordering of the user inputs on the sidebar panel. There are two inputs, cities and crime type, that are used to filter data for both plots. Since these are global settings, it made sense to us to move these up to the top of the page. The last two inputs are the range of years for line chart and a single year for the bar chart. We have added dynamic filtering so that the year for the bar chart is restricted to the range of years in the line chart.
+We made some changes to the user interface that make our app easier to use. We have changed the ordering of the user inputs on the sidebar panel. There are two inputs, cities and crime type, that are used to filter data for both plots. Since these are global settings, it made sense to move these up to the top of the panel. The last two inputs are the range of years for line chart and a single year for the bar chart. We have added dynamic filtering so that the year for the bar chart is restricted to the range of years in the line chart.
 
 ##### Updated Design and Layout
 
-We added a dark navigation bar to the top of our app that contains the title of our app and two tabs. In our old layout, the title was at the top of the page, and the tabs for Plot and Data were below next to the charts. This seemed a little confusing since the tabs were very close to the plot titles. We feel it makes sense to move them away from the plots and next to the title. Further, the black bar clearly differentiates the title of the app from the title of the plots. We have also added a separater between the two plots since before the labels from the top chart were very close to the title of the bottom chart.
+We added a dark navigation bar to the top of our app that contains the title of our app and two tabs. In our old layout, the title was at the top of the page, and the tabs for Plot and Data were below next to the charts. This seemed a little confusing since the tabs were very close to the plot titles. We feel it makes sense to move them away from the plots and next to the title. Further, the black bar clearly differentiates the title of the app from the title of the chart. We have also added a separater between the two plots since before the labels from the top chart were very close to the title of the bottom chart.
 
 ##### Changes to the Plots: Colour Scheme and Labels
 
@@ -21,7 +21,7 @@ We also removed some of the axis and legend labels since it was clear what was b
 
 ##### Some Bug Fixes
 
-Previously there was an issue of an error message appearing when no cities were selected. We have now added a message that says "Please select at least one city" when no cities are selected. The error message made it seem like the app crashed, so catching the error and adding a message makes it clear the users that they just need to enter some inputs to continue using the app.
+Previously there was an issue of an error message appearing when no cities were selected. We have now added a message that says "Please select at least one city." The error message made it seem like the app crashed, so catching the error and adding a message makes it clear to users that they just need to enter some inputs to continue using the app.
 
 There was also a small issue with the Data tab that we resolved this week. The menu to select the number of entries to view on one screen had four options, but after a selection was made, one of the options was missing. We have fixed this so that users can always select between viewing 10, 30, 50, or 100 entries.
 
