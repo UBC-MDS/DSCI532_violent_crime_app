@@ -13,7 +13,7 @@ We made some changes to the user interface that make our app easier to use. We h
 
 ##### Updated Design and Layout
 
-We added a dark navigation bar to the top of our app that contains the title of our app and two tabs. In our old layout, the title was at the top of the page, and the tabs for Plot and Data were below next to the charts. This seemed a little confusing since the tabs were very close to the plot titles. We feel it makes sense to move them away from the plots and next to the title. Further, the black bar makes it clearly differentiates the title of the app from the title of the plots. We have also added a separater between the two plots since before the labels from the top chart  were very close to the title of the bottom chart.
+We added a dark navigation bar to the top of our app that contains the title of our app and two tabs. In our old layout, the title was at the top of the page, and the tabs for Plot and Data were below next to the charts. This seemed a little confusing since the tabs were very close to the plot titles. We feel it makes sense to move them away from the plots and next to the title. Further, the black bar clearly differentiates the title of the app from the title of the plots. We have also added a separater between the two plots since before the labels from the top chart  were very close to the title of the bottom chart.
 
 ##### Changes to the Plots: Colour Scheme and Labels
 
@@ -31,7 +31,7 @@ There was also a small issue with the Data tab that we resolved this week. The m
 
 ##### Remaining Issues We Didn't Fix
 - When a small range of years is selected (i.e.< 3), the labels of the x-axis on the line chart are not integers. Ideally, the axis labels should still be integer values.  
-- When data are not available for a particular city, the city shows up in the legend, but not in the line chart. For example, national averages are only available for homicide and total violent crime. When "National" is selected as one of the cities and another type of crime is selected, "National" shows up in the legend, but there is nothing on the plot. We would like to have a small message explaining that data are not available in these cases.
+- When data are not available for a particular city, the city shows up in the legend, but not in the line chart. For example, national averages are only available for homicide and total violent crime. When "National" is selected as one of the cities and a different type of crime is selected, "National" shows up in the legend, but there is nothing on the plot. We would like to have a small message explaining that data are not available in these cases.
 
 ##### Challenges
 
