@@ -3,123 +3,47 @@ Milestone 4 Writeup
 
 ### Final Improvements
 
-This week we focussed on fixing a few bugs and making it easier for
-users to enter inputs and read charts.
+This week we focussed on fixing a few bugs and making it easier for users to enter inputs and read charts.
 
 ##### Updated User Interface
 
-We changed the ordering of the user inputs on the sidebar panel. There
-are two inputs, cities and crime type, that are used to filter data for
-both plots. Since these are global settings, it made sense to move these
-to the top of the panel. The last two inputs are now the range of years
-for the line chart and a single year for the bar chart. We have added
-dynamic filtering so that the year for the bar chart is restricted to
-the range of years in the line chart. We feel this setup is more
-intituitive.
+We changed the ordering of the user inputs on the sidebar panel. There are two inputs, cities and crime type, that are used to filter data for both plots. Since these are global settings, it made sense to move these to the top of the panel. The last two inputs are now the range of years for the line chart and a single year for the bar chart. We have added dynamic filtering so that the year for the bar chart is restricted to the range of years in the line chart. We feel this setup is more intituitive.
 
 ##### Updated Design and Layout
 
-We added a dark navigation bar to the top of our app that contains the
-title of our app and the two tabs. In our old layout, the title was at
-the top of the page, and the tabs for “Plot” and “Data” were close to
-the first chart title, which seemed confusing. Furthermore, the black
-bar clearly differentiates the title of the app from the title of the
-chart. We have also added a separater between the two charts since
-before the labels from the top chart were very close to the title of the
-bottom chart. These changes improved the readability of the charts.
+We added a dark navigation bar to the top of our app that contains the title of our app and the two tabs. In our old layout, the title was at the top of the page, and the tabs for "Plot" and "Data" were close to the first chart title, which seemed confusing. Furthermore, the black bar clearly differentiates the title of the app from the title of the chart. We have also added a separater between the two charts since before the labels from the top chart were very close to the title of the bottom chart. These changes improved the readability of the charts.
 
 ##### Changes to the Plots: Colour Scheme and Labels
 
-We made another change to the colour scheme this week. The old colour
-scheme used a jarring yellow colour in the line chart that was difficult
-to see. The very bright yellow is no longer used, so the chart is easier
-to read.
+We made another change to the colour scheme this week. The old colour scheme used a jarring yellow colour in the line chart that was difficult to see. The very bright yellow is no longer used, so the chart is easier to read.
 
-We also removed some of the axis and legend labels since it was clear
-what was being listed. For both charts, we removed the label “Cities”;
-and in the legend for the bar chart, we removed the label “Type”.
-Previously, the legend titles were somewhat confusing because they were
-positioned too close to the title.
+We also removed some of the axis and legend labels since it was clear what was being listed. For both charts, we removed the label "Cities"; and in the legend for the bar chart, we removed the label "Type". Previously, the legend titles were somewhat confusing because they were positioned too close to the title.
 
 ##### Some Bug Fixes
 
-Previously, an error appeared when no cities were selected. We have now
-added a message that says: “Please select at least one city.” The error
-message made it seem like the app had crashed, so catching the error and
-adding a message makes it clear to users that they just need to enter
-some inputs to continue using the app.
+Previously, an error appeared when no cities were selected. We have now added a message that says: "Please select at least one city." The error message made it seem like the app had crashed, so catching the error and adding a message makes it clear to users that they just need to enter some inputs to continue using the app.
 
-There was also a small issue with the Data tab that we resolved this
-week. The menu to select the number of entries to view on one screen had
-four options, but sometimes only three options were displayed. We have
-fixed this so that the four options are always available.
+There was also a small issue with the Data tab that we resolved this week. The menu to select the number of entries to view on one screen had four options, but sometimes only three options were displayed. We have fixed this so that the four options are always available.
 
 ### Remaining Issues, Challenges, and Reflections
 
-##### Remaining Issues We Didn’t Fix
+##### Remaining Issues We Didn't Fix
 
-1.  When a small range of years is selected (i.e.\< 3), the labels of
-    the x-axis on the line chart are not integers. Ideally, the axis
-    labels should still be integer values.  
-2.  When data are not available for a particular city, the city shows up
-    in the legend, but not in the line chart. For example, national
-    averages are only available for homicide and total violent crime.
-    When “National” is selected as one of the cities and a different
-    type of crime is selected, “National” shows up in the legend, but
-    there is nothing on the plot. It would be nice if the the list of
-    cities adjusted so that cities with no data for the selected range
-    are not listed. Alternatively, a short message could be displayed in
-    those cases.
+1.  When a small range of years is selected (i.e.&lt; 3), the labels of the x-axis on the line chart are not integers. Ideally, the axis labels should still be integer values.
+2.  When data are not available for a particular city, the city shows up in the legend, but not in the line chart. For example, national averages are only available for homicide and total violent crime. When "National" is selected as one of the cities and a different type of crime is selected, "National" shows up in the legend, but there is nothing on the plot. It would be nice if the the list of cities adjusted so that cities with no data for the selected range are not listed. Alternatively, a short message could be displayed in those cases.
 
 ##### Challenges
 
-Some of the fancier features that we would have liked to have in our app
-turned out to be harder to implement than we expected.
+Some of the fancier features that we would have liked to have in our app turned out to be harder to implement than we expected.
 
-1.  In particular, adding linked views, so that the year for the bar
-    chart could be chosen by clicking a point on the line chart, was
-    more challenging than expected. Initially, this feature seemed
-    intuitive since we often see it in interactive visualizations, but
-    implementing and debugging it in our app was labourious. This was
-    partly because we were not very familiar with plotly charts. We were
-    unable to add this feature to our app; however, in the end, we feel
-    that we made good choices in balancing fancy features with
-    delivering a fully functional app.
+1.  In particular, adding linked views, so that the year for the bar chart could be chosen by clicking a point on the line chart, was more challenging than expected. Initially, this feature seemed intuitive since we often see it in interactive visualizations, but implementing and debugging it in our app was labourious. This was partly because we were not very familiar with plotly charts. We were unable to add this feature to our app; however, in the end, we feel that we made good choices in balancing fancy features with delivering a fully functional app.
 
-2.  Lack of Shiny experience was another trouble for us at the planning
-    stage. When we brainstormed the scope of the project, we were unsure
-    how much functionalities does Shiny have. Due to the limited time,
-    we faced challenges in creating the draft sketch of the app. During
-    the process of developing the app, we are more familiar to Shiny and
-    encouraged to explore more functionalities of applying Shiny in data
-    visualization and presentation.
+2.  Lack of Shiny experience also contriuted to challenges at the planning stage. When we brainstormed the scope of the project, we were unsure what functionalities Shiny had. Taken together with time constraints, this limited the thoroughness of our plan initially. Consequently, we learned about more functionalities during the development process, and sometimes faced challenges adapting what we had already coded when we wanted to add those new features.
 
 ##### Things We Would Do Differently
 
-1.  One thing that we would probably do differently would be spending
-    more time on the initial design and planning of the app before
-    starting to implement it. Often when we wanted to update or add
-    features, we had to make major revisions to the source code. It
-    would have been a good idea to spend more time planning out our
-    design and soliciting feedback on a simple mockup before
-    development. In doing so, we would be able to implement our app with
-    some key features from the start, instead of writing the code and
-    then making major revisions. It would also have been helpful to
-    solicit feedback from others at multiple points in the development
-    process to test out whether changes we made actually improved the
-    app for users.
+1.  One thing that we would probably do differently would be spending more time on the initial design and planning of the app before starting to implement it. Often when we wanted to update or add features, we had to make major revisions to the source code. It would have been a good idea to spend more time planning out our design and soliciting feedback on a simple mockup before development. In doing so, we would be able to implement our app with some key features from the start, instead of writing the code and then making major revisions. It would also have been helpful to solicit feedback from others at multiple points in the development process to test out whether changes we made actually improved the app for users.
 
-2.  For the app specifically, one thing that we could have done to make
-    our app fancier is adding a map tab that allows users to outline the
-    cities and visualize the rate of crime clearly. Also, we can create
-    a fileration mechanism so users can select specific year and type of
-    crime. Based on the selection, we can use different color to reflect
-    the rate of selected crime. If they find interesting trend for
-    specific cities that they want to drill down on, they can go to the
-    plot tab that we already have now, to see the trends over time for
-    those cities.
+2.  For this app specifically, one thing that we could have done is add a map tab so that users can quickly look at the crime rates geographically for many cities and get a broad sense of the trends. We could allow users to filter different types of crime and years on the map. Adding the map would give a more general perspective and could help users narrow down which cities they want to view in detail on the Plot tab.
 
-3.  After talking with TA this week, we agreed that we should add
-    multi-selection options for the type of crime. Instead of just
-    showing the rate of a single crime type, users are allowed to
-    explore the trends of multiple crime types.
+3.  Based on a conversation with our TA this week, we think that allowing users to aggregate multiple types of crime, instead of just showing the rate of a single crime type, would improve our app. This would require better planning at the data wrangling stage, since our current tidy format is not very flexible and makes it difficult for us to add this feature now.
